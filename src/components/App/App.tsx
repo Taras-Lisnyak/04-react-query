@@ -19,13 +19,9 @@ export default function App() {
     setMovies([]);
     setLoading(true);
     setError(null);
-  
-    console.log("Token:", import.meta.env.VITE_TMDB_TOKEN);
-
-
 
     try {
-      const data = await fetchMovies({ query }, import.meta.env.VITE_TMDB_TOKEN);
+      const data = await fetchMovies({ query });
       if (data.results.length === 0) {
         toast.error("No movies found for your request.");
       }
