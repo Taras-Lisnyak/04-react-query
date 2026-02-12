@@ -27,7 +27,9 @@ export default function App() {
       }
       setMovies(data.results);
     } catch (err) {
-      setError("Не вдалося завантажити фільми");
+      const message = err instanceof Error ? err.message : "Не вдалося завантажити фільми";
+      setError(message);
+      toast.error(message);
     } finally {
       setLoading(false);
     }
