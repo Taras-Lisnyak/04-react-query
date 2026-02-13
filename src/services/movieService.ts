@@ -1,9 +1,6 @@
 import axios from "axios";
 import type { Movie } from "../types/movie";
 
-interface FetchMoviesParams {
-  query: string;
-}
 
 interface FetchMoviesResponse {
   page: number;
@@ -12,10 +9,7 @@ interface FetchMoviesResponse {
   total_results: number;
 }
 
-export async function fetchMovies(
-  params: FetchMoviesParams
-): Promise<FetchMoviesResponse> {
-  const { query } = params;
+export async function fetchMovies(query: string, page: number): Promise<FetchMoviesResponse> {
   const token = import.meta.env.VITE_TMDB_TOKEN;
 
   const response = await axios.get<FetchMoviesResponse>(
@@ -23,9 +17,9 @@ export async function fetchMovies(
     {
       params: {
         query,
+        page,
         include_adult: false,
         language: "en-US",
-        page: 1,
       },
       headers: {
         Authorization: `Bearer ${token}`,
