@@ -21,7 +21,8 @@ export default function App() {
     queryKey: ["movies", query, page],
     queryFn: () => fetchMovies(query, page),
     enabled: !!query,
-  })
+    placeholderData: (prevData) => prevData, 
+      });
 
   const handleSearch = (newQuery: string) => {
     setQuery(newQuery);
